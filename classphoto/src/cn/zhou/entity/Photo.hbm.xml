@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 1 配置类和表对应 
+		class标签
+		name属性：实体类全路径
+		table属性：数据库表名称
+	-->
+	<class name="cn.zhou.entity.Photo" table="zz_photo" >
+		<id name="pid" column="pid">
+			<generator class="native"></generator>
+		</id>
+		<property name="address" column="address"></property>
+		<property name="ptime" column="ptime"></property>
+		<property name="pname" column="pname"></property>
+		<property name="praise" column="praise"></property>
+		<property name="trample" column="trample"></property>
+		<many-to-one name="album" class = "cn.zhou.entity.Album" column="ap_id"></many-to-one>
+		
+		<set name="comment" inverse="true" cascade="all" sort="natural">
+			<key column = "cp_id"></key>
+			<one-to-many class = "cn.zhou.entity.Comment"/>
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>
+
+
+
+
+

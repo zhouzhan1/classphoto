@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+	<struts>
+	<!-- 设置文件上传大小 -->
+	<constant name="struts.multipart.maxSize" value="104857600"></constant>
+	
+	<constant name="struts.i18n.encoding" value="utf-8" />	
+	
+	<package  name="all"  extends="struts-default" namespace="/">
+     <interceptors>
+       <interceptor name="loginInterceotor" class="cn.zhou.utils.LoginIterceptor"></interceptor>
+       
+       <interceptor-stack name="myglobal">
+           <interceptor-ref name="loginInterceotor"></interceptor-ref>
+           <interceptor-ref name="defaultStack"></interceptor-ref>        
+       </interceptor-stack>  
+          
+     </interceptors>
+  	<default-interceptor-ref name="myglobal"></default-interceptor-ref>  
+  	
+  
+  
+  </package>
+		
+		
+		<package name="action2" extends="struts-default" namespace="/">
+			<action name="user-*" class="userAction" method="{1}">
+				<result name = "loginYes" type="redirect">/classphoto/index.jsp</result>
+				<result name = "loginNo" >/classphoto/login.jsp</result>
+				<result name = "regist">/classphoto/login.jsp</result>
+				<result name = "registNo" >/classphoto/regist.jsp</result>
+				
+			</action>
+		</package>
+	
+			
+		<package name="action1" extends = "all" namespace="/">
+		<!-- 全局页面结果 -->
+			 <global-results>
+     			<result name="loginNo">/classphoto/login.jsp</result>
+  			 </global-results>
+		
+			<action name="user_*" class = "userAction" method = "{1}">
+			<!-- 使用自定义拦截器 -->
+			<!-- 	<interceptor-ref name="loginIntercept">
+					配置action中的某些方法不用拦截
+					<param name="excludeMethods">login,regist</param>
+				</interceptor-ref>
+				手动配置默认拦截器
+				<interceptor-ref name="defaultStack"></interceptor-ref> -->
+				
+				<result name = "goIndex" type="redirect">/classphoto/index.jsp</result>
+				<result name = "exit">/classphoto/login.jsp</result>
+				<result name = "set">/classphoto/set.jsp</result>
+				<result name = "setPassword" >/classphoto/set.jsp</result>
+				<result name = "setClzz" >/classphoto/set.jsp</result>
+				<result name = "setSchool" >/classphoto/set.jsp</result>
+				<result name = "setPhoto" >/classphoto/set.jsp</result>
+				<result name = "logout" >/classphoto/set.jsp</result>
+				<result name = "removeUser" type="chain">user_set</result>
+				
+			</action>
+			<action name ="album_*" class = "albumAction" method = "{1}">
+			<!-- 	<interceptor-ref name="loginIntercept">
+					配置action中的某些方法不用拦截
+					<param name="excludeMethods"></param>
+				</interceptor-ref>
+				手动配置默认拦截器
+				<interceptor-ref name="defaultStack"></interceptor-ref> -->
+				
+				<result name = "addAlbum">/classphoto/addAlbum.jsp</result>
+				<result name = "showAlbum">/classphoto/showAlbum.jsp</result>
+				<!--  <result name = "allSort">/classphoto/allsort.jsp</result>-->
+				<result name = "sortAlbum">/classphoto/showAlbum.jsp</result>
+				<result name = "deleteAlbum" type="chain">album_showAlbum</result>
+				<result name = "selectAlbum">/classphoto/showAlbum.jsp</result>
+				<result name = "toAddPage">/classphoto/updateAlbum.jsp</result>
+				<result name = "updateAlbum" type="chain">album_showAlbum</result>
+			</action>
+			
+			<action name = "photo_*" class = "cn.zhou.action.PhotoAction" method = "{1}">
+			<!-- 	<interceptor-ref name="loginIntercept">
+					配置action中的某些方法不用拦截
+					<param name="excludeMethods"></param>
+				</interceptor-ref>
+				手动配置默认拦截器
+				<interceptor-ref name="defaultStack"></interceptor-ref> -->
+				
+				<result name = "addPhoto">/classphoto/addPhoto.jsp</result>
+				<result name = "showPhoto">/classphoto/showPhoto.jsp</result>
+				<result name = "deletePhoto" type="chain">photo_showPhoto</result>
+				<result name = "onePhoto">/classphoto/onePhoto.jsp</result>
+				<result name = "rankPhoto">/classphoto/rankPhoto.jsp</result>
+				<result name = "beforePhoto">/classphoto/onePhoto.jsp</result>
+				<result name = "nextPhoto">/classphoto/onePhoto.jsp</result>
+				<result name = "bigPhoto">/classphoto/bigPhoto.jsp</result>
+				<result name = "forAddPhoto">/classphoto/addPhoto.jsp</result>
+				<result name = "deleteOnePhoto">/classphoto/onePhoto.jsp</result>
+				<result name = "showSelectPhoto">/classphoto/showSelectPhoto.jsp</result>
+				<result name = "removePhoto">/classphoto/onePhoto.jsp</result>
+				<result name = "toCommentPage">/classphoto/comment.jsp</result>
+				<result name = "hotPhoto">/classphoto/hotPhoto.jsp</result>
+				<result name = "zhRankInPhoto">/classphoto/zhph.jsp</result>
+				<result name = "praisePhoto">/classphoto/praisePhoto.jsp</result>
+			</action>
+			<action name="inform_*" class = "informAction" method = "{1}">
+				<result name="addInform">/classphoto/inform.jsp</result>
+				<result name="bInform">/classphoto/bInform.jsp</result>
+			</action>
+		</package>
+	
+	</struts>

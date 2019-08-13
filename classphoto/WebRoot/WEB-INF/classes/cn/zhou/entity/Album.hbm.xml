@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 1 配置类和表对应 
+		class标签
+		name属性：实体类全路径
+		table属性：数据库表名称
+	-->
+	<class name="cn.zhou.entity.Album" table="zz_album">
+		<id name="aid" column="aid">
+			<generator class="native"></generator>
+		</id>
+		<property name="albumName" column="albumName"></property>
+		<property name="albumSort" column="albumSort"></property>
+		<property name="school" column="school"></property>
+		<property name="clzz" column="clzz"></property>
+		<property name="albumDesc" column="albumDesc"></property>
+		<property name="atime" column="atime"></property>
+		<property name="aname" column="aname"></property>
+		<property name="aPhotoAddress" column="aPhotoAddress"></property>
+		
+		<!-- 表示相册中的所有联系人 -->
+		<set name="photo" inverse="true" cascade="all" sort="natural">
+			<key column = "ap_id"></key>
+			<one-to-many class = "cn.zhou.entity.Photo"/>
+		</set>
+	</class>
+</hibernate-mapping>
+
+
+
+
+

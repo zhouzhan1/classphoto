@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 1 配置类和表对应 
+		class标签
+		name属性：实体类全路径
+		table属性：数据库表名称
+	-->
+	<class name="cn.zhou.entity.Praise" table="zz_praise">
+		<id name="praiseId" column="praiseId">
+			<generator class="native"></generator>
+		</id>
+		<property name="photoId" column="photoId"></property>
+		<property name="userId" column="userId"></property>
+		
+	</class>
+</hibernate-mapping>
+
+
+
+
+
